@@ -1,4 +1,21 @@
 {
   "start": "node game.js",
-  "build": ""
+  "build": "",
+  "name": "game-of-life",
+  "description": "A app made with JS that simulaes Conway's Game Of Life.",
+  "version": "1.0.0",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aw-davidson/conways-game-of-life.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aw-davidson/conways-game-of-life/issues"
+  },
+  "homepage": "https://github.com/aw-davidson/conways-game-of-life#readme"
 }
