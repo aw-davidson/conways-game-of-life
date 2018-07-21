@@ -1,4 +1,4 @@
 # Game of Life in JS
 
-Fullstack Academy workshop.
+A app made with JS that simulaes Conway's Game Of Life.
 
