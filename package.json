@@ -1,5 +1,5 @@
 {
-  "start": "node game.js",
+  "start": "node server",
   "build": "",
   "name": "game-of-life",
   "description": "A app made with JS that simulaes Conway's Game Of Life.",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/aw-davidson/conways-game-of-life/issues"
   },
-  "homepage": "https://github.com/aw-davidson/conways-game-of-life#readme"
+  "homepage": "https://github.com/aw-davidson/conways-game-of-life#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
