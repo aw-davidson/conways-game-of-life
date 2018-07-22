@@ -1,12 +1,13 @@
 const gameOfLife = {
-  width: 12,
-  height: 12,
+  width: 60,
+  height: 25,
   stepInterval: null,
+  stepRate: 80,
 
   // Utility functions
   forEachCell: function(iteratorFunc) {
 
-      // es6 Array.from() creates a new Array from an iterable : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+
       Array.from(document.getElementsByTagName('td')).forEach(cell => {
           const coords = this.getCoordsOfCell(cell);
           iteratorFunc(cell, coords[0], coords[1]);
@@ -14,10 +15,6 @@ const gameOfLife = {
   },
   getCoordsOfCell: function(cell) {
       const idSplit = cell.id.split('-'); // ['0', '0']
-
-      // es6 Arrow Functions are lexical in scope : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-        // Lexical Scoping defines how variable names are resolved in nested functions: inner functions contain the scope of parent functions even if the parent function has returned.
-      // `+` before a string we can coerce a string into a number
       return idSplit.map(str => +str)
   },
   getCellStatus: function(cell) {
@@ -91,11 +88,11 @@ const gameOfLife = {
       document.getElementById("clear_btn").onclick= () => this.clearBoard();
       document.getElementById("reset_btn").onclick = () => this.resetRandom();
       document.getElementById("play_btn").onclick = () => this.enableAutoPlay();
+      document.getElementById("step_input").onchange = () => this.onRateChange();
 
   },
   step: function() {
-      // Logic for each step to kill and birth cells
-      // We take a snapshot before, determine everything that should be changed, and THEN change all of the cells
+
       const cellsToToggle = [];
       this.forEachCell((cell, x, y) => {
           const countLiveNeighbors = this.getAliveNeighbors(cell).length;
@@ -110,17 +107,18 @@ const gameOfLife = {
       this.forEachCell((cell) => this.setCellStatus(cell, "dead"));
   },
   resetRandom: function() {
-
-      // conditional (ternary) operator : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
       this.forEachCell((cell) => this.setCellStatus(cell, Math.random() > .5 ? 'alive' : 'dead'))
   },
   enableAutoPlay: function() {
       if (this.stepInterval) return this.stopAutoPlay();
-      this.stepInterval = setInterval(this.step.bind(this), 500);
+      this.stepInterval = setInterval(this.step.bind(this), this.stepRate);
   },
   stopAutoPlay: function() {
       clearInterval(this.stepInterval);
       this.stepInterval = null;
+  },
+  onRateChange: function() {
+    this.stepRate = document.getElementById('step_input').value;
   }
 
 };
